@@ -10,8 +10,8 @@ def fetch_quote():
         return None
 
 
-def create_voice_over_elevenlabs(text, api_key, audio_path='quote.mp3'):
-    url = f'https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM'
+def create_voice_over_elevenlabs(text, api_key, voice_id='21m00Tcm4TlvDq8ikWAM', audio_path='quote.mp3'):
+    url = f'https://api.elevenlabs.io/v1/text-to-speech/{voice_id}'
     headers = {
         'accept': 'audio/mpeg',
         'xi-api-key': api_key,
@@ -40,8 +40,12 @@ def main():
         quote_text = quote['text']
         quote_author = quote['author']
         full_text = f"{quote_text} by {quote_author}"
-        audio_path = 'quote.mp3'
 
+        # Print the quote in the terminal
+        print("Fetched Quote:")
+        print(full_text)
+
+        audio_path = 'quote.mp3'
         create_voice_over_elevenlabs(full_text, api_key, audio_path=audio_path)
     else:
         print("Failed to fetch quote.")
